@@ -15,4 +15,8 @@ pixels in-game, and each color represents a certain type of tile:
     grey = pipe
     light blue = sky
 
+the level is 5-2 by the way.  i haven't yet figured out a good way to automate
+the "cleaning up" of input maps, so i haven't tried it with other levels.
+tree/water/castle levels could be interesting.
+
 written by nick welch in the year 2009.  author disclaims copyright.
