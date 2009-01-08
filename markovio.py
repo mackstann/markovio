@@ -55,7 +55,7 @@ prefix = '/tmp/markovio.out'
 xpm = prefix+'.xpm'
 png = prefix+'.png'
 
-f = open(xpm, 'wr+')
+f = open(xpm, 'w')
 f.write(''.join(header))
 
 for y in range(height):
