@@ -1,3 +1,5 @@
+#!/usr/bin/env python
+
 import subprocess, sys, re, random, pprint, tempfile
 
 # pipe in an xpm that's 200x14.  change bgpixel if the sky background color is
