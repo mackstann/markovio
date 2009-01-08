@@ -2,7 +2,7 @@
 
 import subprocess, sys, re, random, pprint, tempfile
 
-infile = open(sys.argv[1] if len(sys.argv) > 1 else '5-2.pixels.xpm')
+infile = open(sys.argv[1] if len(sys.argv) > 1 else 'input.xpm')
 
 # change these according to your input image, if needed
 width = 200
