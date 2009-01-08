@@ -18,16 +18,21 @@ lines = filter(None, infile.readlines())
 header = lines[:-14]
 imglines = list(reversed([ l.lstrip('"')[:200] for l in lines[-14:] ]))
 
+def adjacent(data, x, y):
+    above     = data[y-1][x] if height-1 > y > 0 else None
+    left      = data[y][x-1] if x > 0 else None
+    leftleft  = data[y][x-2] if x > 1 else None
+    aboveleft = data[y-1][x-1] if above and left else None
+    return above, left, leftleft, aboveleft
+
 # build markov chains
 
 table = {}
+
 for y, line in enumerate(imglines):
     for x, pixel in enumerate(line):
-        above     = imglines[y-1][x] if height-1 > y > 0 else None
-        left      = imglines[y][x-1] if x > 0 else None
-        leftleft  = imglines[y][x-2] if x > 1 else None
-        aboveleft = imglines[y-1][x-1] if above and left else None
-        table.setdefault((y, above, left, aboveleft, leftleft), []).append(pixel)
+        key = (y,) + adjacent(imglines, x, y)
+        table.setdefault(key, []).append(pixel)
 
 # generate output
 
@@ -36,11 +41,8 @@ output = []
 for y in range(height):
     output.append([])
     for x in range(width):
-        above     = output[y-1][x] if height-1 > y > 0 else None
-        left      = output[y][x-1] if x > 0 else None
-        leftleft  = output[y][x-2] if x > 1 else None
-        aboveleft = output[y-1][x-1] if above and left else None
-        output[-1].append(random.choice(table.get((y, above, left, aboveleft, leftleft), bgpixel)))
+        key = (y,) + adjacent(output, x, y)
+        output[-1].append(random.choice(table.get(key, bgpixel)))
 
 # un-reverse only vertically -- but leave horizontal alone.  why does this work
 # best?  who the hell knows?
