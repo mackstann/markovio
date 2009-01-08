@@ -70,15 +70,24 @@ for y in range(height):
         f.write('};')
 
 f.close()
-assert 0 == subprocess.Popen([
-    "convert", '-scale',
-    "%dx%d" % (width*outputscale, height*outputscale),
-    xpm, png
-]).wait()
+try:
+    subprocess.Popen([
+        "convert", '-scale',
+        "%dx%d" % (width*outputscale, height*outputscale),
+        xpm, png
+    ]).wait()
+    worked = True
+except OSError:
+    worked = False
 
 print open(xpm, 'r').read()
 print
 
-print "the above xpm image was written to %s and" % xpm
-print "also converted to %s, scaled up %d times" % (png, outputscale)
+sys.stdout.write("the above xpm image was written to %s" % xpm)
+
+if worked:
+    print " and\nalso converted to %s, scaled up %d times" % (png, outputscale)
+else:
+    print ",\nalthough conversion from xpm to png didn't work."
+    print "do you have the 'convert' utility installed (from imagemagick)?"
 
