@@ -68,11 +68,11 @@ for y in range(height):
         f.write('};')
 
 f.close()
-subprocess.Popen([
+assert 0 == subprocess.Popen([
     "convert", '-scale',
     "%dx%d" % (width*outputscale, height*outputscale),
     xpm, png
-])
+]).wait()
 
 print open(xpm, 'r').read()
 print
