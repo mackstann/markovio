@@ -34,6 +34,7 @@ pixels in-game, and each color represents a certain type of tile:
     white = cloud
     red = spring
     grey = pipe
+    black = bullet bill cannon
     light blue = sky
 
 written by nick welch in the year 2009.  author disclaims copyright.
