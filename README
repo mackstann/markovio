@@ -1,4 +1,5 @@
-this script generates randomized super mario bros level-like images.
+this script generates randomized super mario bros level-like images using
+python and a markov chain.
 
 how to run:
 
