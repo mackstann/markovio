@@ -5,6 +5,17 @@ how to run:
 
     ./markovio.py
 
+see the output example files if you're just curious what the results look like.
+
+the input level is 5-2.  i haven't yet figured out a good way to automate the
+"cleaning up" of input maps, so i haven't tried it with other levels.
+tree/water/castle levels could be interesting.  mixing different levels as
+well.
+
+planned improvement: make the markov chain use probabilities, instead of just
+recording all possible states and then picking one randomly.  although this
+seems to work decently already.
+
 original map obtained from http://ian-albert.com/misc/smb.php and scaled/
 modified to a representational format where one pixel equals one tile, or 16x16
 pixels in-game, and each color represents a certain type of tile:
@@ -15,9 +26,5 @@ pixels in-game, and each color represents a certain type of tile:
     red = spring
     grey = pipe
     light blue = sky
-
-the level is 5-2 by the way.  i haven't yet figured out a good way to automate
-the "cleaning up" of input maps, so i haven't tried it with other levels.
-tree/water/castle levels could be interesting.
 
 written by nick welch in the year 2009.  author disclaims copyright.
