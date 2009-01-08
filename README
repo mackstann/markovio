@@ -1,0 +1,18 @@
+this script generates randomized super mario bros level-like images.
+
+how to run:
+
+    ./markovio.py
+
+original map obtained from http://ian-albert.com/misc/smb.php and scaled/
+modified to a representational format where one pixel equals one tile, or 16x16
+pixels in-game, and each color represents a certain type of tile:
+
+    brown = brick/ground
+    blue = question box
+    white = cloud
+    red = spring
+    grey = pipe
+    light blue = sky
+
+written by nick welch in the year 2009.  author disclaims copyright.
