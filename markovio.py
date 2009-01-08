@@ -2,14 +2,14 @@
 
 import subprocess, sys, re, random, pprint, tempfile
 
-# pipe in an xpm that's 200x14.  change bgpixel if the sky background color is
-# not the space character in your xpm.
-
 infile = open(sys.argv[1] if len(sys.argv) > 1 else '5-2.pixels.xpm')
 
+# change these according to your input image, if needed
 width = 200
 height = 14
 bgpixel = ' '
+
+# the output png should be scaled up, otherwise it's tiny tiny
 outputscale = 8
 
 lines = filter(None, infile.readlines())
