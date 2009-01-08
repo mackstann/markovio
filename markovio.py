@@ -19,10 +19,10 @@ header = lines[:-14]
 imglines = list(reversed([ l.lstrip('"')[:200] for l in lines[-14:] ]))
 
 def adjacent(data, x, y):
-    above     = data[y-1][x] if height-1 > y > 0 else None
-    left      = data[y][x-1] if x > 0 else None
-    leftleft  = data[y][x-2] if x > 1 else None
-    aboveleft = data[y-1][x-1] if above and left else None
+    above     = data[y-1][x  ] if 0 < y < height-1 else None
+    left      = data[y  ][x-1] if 0 < x            else None
+    leftleft  = data[y  ][x-2] if 1 < x            else None
+    aboveleft = data[y-1][x-1] if above and left   else None
     return above, left, leftleft, aboveleft
 
 # build markov chains
