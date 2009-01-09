@@ -45,7 +45,7 @@ height = len(imglines)
 header = lines[:-height]
 
 # reversed because building from bottom to top and right to left works better
-imglines = list(reversed(imglines))
+imglines = imglines[::-1]
 
 def adjacent(data, x, y):
     above     = data[y-1][x  ] if 0 < y < height-1 else None
