@@ -14,10 +14,6 @@ well.
 
 planned improvements:
 
-    make the markov chain use probabilities, instead of just recording all
-    possible states and then picking one randomly.  although this seems to work
-    decently already.
-
     use the data gathered from the input level to build a level that is of
     different dimensions, like, say, WAY bigger.  this could be interesting to
     actually play, although hacking into an emulator of the original game is
