@@ -6,17 +6,18 @@ usage = """\
 usage: %s [options] [inputfile]
 
 options:
+    -h,   --help:           this help.
     -b x, --bg-pixel=x:     background pixel character of x.  default is space.
     -s x, --output-scale=x: how large to magnify output png.  default is 8.
 
 input file defaults to "./input.xpm".  it must be an xpm in a similar format to
-the ones made by the gimp.
-""" % sys.argv[0]
+the ones made by the gimp.""" % sys.argv[0]
 
 try:
-    opts, args = getopt.getopt(sys.argv[1:], "b:s:", ["bg-pixel=", "output-scale="])
+    opts, args = getopt.getopt(sys.argv[1:], "hb:s:", ["help", "bg-pixel=", "output-scale="])
 except getopt.GetoptError, e:
     print str(e)
+    print
     print usage
     sys.exit(2)
 
@@ -30,6 +31,9 @@ for o, a in opts:
         bgpixel = a
     elif o in ('-s', '--output-scale'):
         outputscale = int(a)
+    elif o in ('-h', '--help'):
+        print usage
+        sys.exit(0)
 
 def raw_line_data(line):
     return line.lstrip('"').rstrip('"},;\n')
