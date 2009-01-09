@@ -1,22 +1,47 @@
 #!/usr/bin/env python
 
-import subprocess, sys, re, random, pprint, tempfile
+import subprocess, sys, re, random, getopt
 
-infile = open(sys.argv[1] if len(sys.argv) > 1 else 'input.xpm')
+usage = """\
+usage: %s [options] [inputfile]
 
-# change these according to your input image, if needed
-width = 200
-height = 14
+options:
+    -b x, --bg-pixel=x:     background pixel character of x.  default is space.
+    -s x, --output-scale=x: how large to magnify output png.  default is 8.
+
+input file defaults to "./input.xpm".  it must be an xpm in a similar format to
+the ones made by the gimp.
+""" % sys.argv[0]
+
+try:
+    opts, args = getopt.getopt(sys.argv[1:], "b:s:", ["bg-pixel=", "output-scale="])
+except getopt.GetoptError, e:
+    print str(e)
+    print usage
+    sys.exit(2)
+
 bgpixel = ' '
-
-# the output png should be scaled up, otherwise it's tiny tiny
 outputscale = 8
+infile = open(args[0] if args else 'input.xpm')
 
-lines = filter(None, infile.readlines())
+for o, a in opts:
+    if o in ('-b', '--bg-pixel'):
+        assert len(a) == 1
+        bgpixel = a
+    elif o in ('-s', '--output-scale'):
+        outputscale = int(a)
+
+def raw_line_data(line):
+    return line.lstrip('"').rstrip('"},;\n')
+
+lines = [ line for line in infile.readlines() if line.strip() ]
+width = len(raw_line_data(lines[-1]))
+imglines = [ raw_line_data(line) for line in lines if len(line) > width ]
+height = len(imglines)
+header = lines[:-height]
 
 # reversed because building from bottom to top and right to left works better
-header = lines[:-14]
-imglines = list(reversed([ l.lstrip('"')[:200] for l in lines[-14:] ]))
+imglines = list(reversed(imglines))
 
 def adjacent(data, x, y):
     above     = data[y-1][x  ] if 0 < y < height-1 else None
